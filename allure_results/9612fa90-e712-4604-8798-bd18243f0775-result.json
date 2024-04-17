@@ -1,0 +1,1 @@
+{"name": "Проверка требования: «в тело ответа возвращается список заказов»", "status": "passed", "start": 1713311772874, "stop": 1713311791968, "uuid": "cd115b9d-46ad-4632-b09f-d7c83496cd57", "testCaseId": "65ceff89b2c6464cbf4d4139ae74bcf0", "fullName": "tests.test_orders_endpoint.TestOrdersEndpoint#test_getting_orders_list_return_orders"}
