@@ -3,14 +3,13 @@ import allure
 import pytest
 import requests
 
-from helpers import Helpers
+from urls import Urls
 
 
 class TestCreateOrderEndpoint:
-    orders_endpoint = f"{Helpers.BASE_URL}/api/v1/orders"
 
     @allure.title('Проверка требований: «можно указать один из цветов — BLACK или GREY» и «тело ответа содержит track»')
-    @allure.link(f'{Helpers.BASE_URL}/docs/#api-Orders-CreateOrder',
+    @allure.link(f'{Urls.BASE_URL}/docs/#api-Orders-CreateOrder',
                  name='Ссылка на документацию эндпоинта Создание заказа')
     @pytest.mark.parametrize('colours', ["BLACK", "GREY"])
     def test_create_order_return_201(self, colours):
@@ -30,12 +29,12 @@ class TestCreateOrderEndpoint:
 
         json_payload = json.dumps(payload)
 
-        response = requests.post(TestCreateOrderEndpoint.orders_endpoint, data=json_payload)
+        response = requests.post(Urls.orders_endpoint_url, data=json_payload)
 
         assert response.status_code == 201 and 'track' in response.text
 
     @allure.title('Проверка требования: «можно совсем не указывать цвет»')
-    @allure.link(f'{Helpers.BASE_URL}/docs/#api-Orders-CreateOrder',
+    @allure.link(f'{Urls.BASE_URL}/docs/#api-Orders-CreateOrder',
                  name='Ссылка на документацию эндпоинта Создание заказа')
     def test_create_order_without_color_return_201(self):
         payload = {
@@ -49,12 +48,12 @@ class TestCreateOrderEndpoint:
             "comment": "Saske, come back to Konoha"
         }
 
-        response = requests.post(TestCreateOrderEndpoint.orders_endpoint, data=payload)
+        response = requests.post(Urls.orders_endpoint_url, data=payload)
 
-        assert response.status_code == 201
+        assert response.status_code == 201 and 'track' in response.text
 
     @allure.title('Проверка требования: «можно указать оба цвета»')
-    @allure.link(f'{Helpers.BASE_URL}/docs/#api-Orders-CreateOrder',
+    @allure.link(f'{Urls.BASE_URL}/docs/#api-Orders-CreateOrder',
                  name='Ссылка на документацию эндпоинта Создание заказа')
     def test_create_order_with_two_colours_return_201(self):
         payload = {
@@ -73,6 +72,6 @@ class TestCreateOrderEndpoint:
 
         json_payload = json.dumps(payload)
 
-        response = requests.post(TestCreateOrderEndpoint.orders_endpoint, data=json_payload)
+        response = requests.post(Urls.orders_endpoint_url, data=json_payload)
 
-        assert response.status_code == 201
+        assert response.status_code == 201 and 'track' in response.text

@@ -3,6 +3,7 @@ import random
 import string
 import pytest
 
+from urls import Urls
 from helpers import Helpers
 
 
@@ -60,6 +61,6 @@ def correct_payload_for_creating_courier():
         "password": Helpers.password
     }
 
-    login_response = requests.post(f'{Helpers.BASE_URL}/api/v1/courier/login', data=payload_for_login)
+    login_response = requests.post(f'{Urls.BASE_URL}/api/v1/courier/login', data=payload_for_login)
     courier_id = login_response.json()["id"]
-    requests.delete(f'{Helpers.BASE_URL}/api/v1/courier/{courier_id}')
+    requests.delete(f'{Urls.BASE_URL}/api/v1/courier/{courier_id}')
